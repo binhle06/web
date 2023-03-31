@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+/* Navigatation Bar of Login page   */
+
+
+
+
+/* Section of Login page   */
+  section {
+      position:relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+  }
+
+
+  /* Section Left(image) of Login page   */
+
+  section .imgBx{
+      position: relative;
+      height: 100%;
+      width: 50%;
+  }
+  section .imgBx::before{
+      content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(250deg,blue,rgb(4, 231, 53));
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+  section .imgBx img {
+    position:absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+/* Section right of Login page   */
+
+  section .ContentBx{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 50%;
+      height: 100%;
+  }
+  section .ContentBx .FormBx{
+      width: 50%;
+  }
+
+ 
+  section .ContentBx .FormBx h2{
+    color: #607d8b;
+    font-weight: 600;
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #ff4584;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+section .ContentBx .FormBx .InputBx{
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+section .ContentBx .FormBx .InputBx span{
+    margin-bottom: 5px;
+    font-size: 16px;
+    display: inline-block;
+    color: #607d8b;
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+section .ContentBx .FormBx .InputBx input{
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    font-weight: 400;
+    border: 1px solid #607d8b;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #607d8b;
+    background: transparent;
+    border-radius: 30px;
+}
+section .ContentBx .FormBx .InputBx input[type="submit"]{
+    background: #40418f;
+    color: #fff;
+    outline: none;
+    border:none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+section .ContentBx .FormBx .InputBx p{
+    color: #607d8b;
+}
+
+section .ContentBx .FormBx .InputBx p a{
+    color: #ff4584;
+    text-decoration-line: none;
+}
+
+@media (max-width: 768px)
+{
+    section .imgBx
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+    }
+    section .ContentBx{
+        display: flex;
+        justify-content: center;
+        align-items: center;      
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        z-index: 2;
+    }
+    section .ContentBx .FormBx{
+        background-color: white;
+        padding: 30px 15px;
+        border-radius: 10%;
+    }
+}

@@ -1,0 +1,312 @@
+/*  Admin Nav Bar  */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+
+nav{
+    background: #0082e6;
+    height: 80px;
+    width: 100%;
+  }
+  label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+  }
+  nav ul{
+    float: right;
+    margin-right: 5px;
+  }
+  nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+  }
+  nav ul li a{
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  a:hover{
+    background: #1b9bff;
+    transition: .5s;
+  }
+  .checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+  }
+  #check{
+    display: none;
+  }
+  @media (max-width: 952px){
+    label.logo{
+      font-size: 30px;
+      padding-left: 50px;
+    }
+    nav ul li a{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 858px){
+    .checkbtn{
+      display: block;
+    }
+    ul{
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #2c3e50;
+      top: 80px;
+      left: -100%;
+      text-align: center;
+      transition: all .5s;
+      z-index: 200;
+    }
+    nav ul li{
+      display: block;
+      margin: 50px 0;
+      line-height: 30px;
+    }
+    nav ul li a{
+      font-size: 20px;
+    }
+     a:hover{
+      background: none;
+      color: #0082e6;
+    }
+    #check:checked ~ ul{
+      left: 0;
+    }
+  }
+
+
+/*  Admin Home Page  */
+
+
+/* Section of Admin page   */
+section {
+    position:relative;
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+}
+
+
+/* Section Left(image) of Login page   */
+
+section.Home_Page .imgBx{
+    position: relative;
+    height: 100%;
+    width: 50%;
+}
+section.Home_Page .imgBx::before{
+    content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(250deg,blue,rgb(4, 231, 53));
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+section.Home_Page .imgBx img {
+  position:absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+
+/* Section right of Login page   */
+
+section.Home_Page .ContentBx{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+}
+section.Home_Page .ContentBx .FormBx{
+  width: 50%;
+}
+
+
+section.Home_Page .ContentBx .FormBx h2{
+color: #607d8b;
+font-weight: 600;
+font-size: 2em;
+text-transform: uppercase;
+margin-bottom: 20px;
+border-bottom: 4px solid #ff4584;
+display: inline-block;
+letter-spacing: 1px;
+}
+
+section.Home_Page .ContentBx .FormBx .InputBx{
+margin-bottom: 20px;
+text-align: left;
+}
+
+section.Home_Page .ContentBx .FormBx .InputBx span{
+margin-bottom: 5px;
+font-size: 16px;
+display: inline-block;
+color: #607d8b;
+font-weight: 300;
+font-size: 16px;
+letter-spacing: 1px;
+}
+
+section.Home_Page .ContentBx .FormBx .InputBx input{
+width: 100%;
+padding: 10px 20px;
+outline: none;
+font-weight: 400;
+border: 1px solid #607d8b;
+font-size: 16px;
+letter-spacing: 1px;
+color: #607d8b;
+background: transparent;
+border-radius: 30px;
+}
+section.Home_Page .ContentBx .FormBx .InputBx input[type="submit"]{
+background: #40418f;
+color: #fff;
+outline: none;
+border:none;
+font-weight: 500;
+cursor: pointer;
+}
+
+section.Home_Page .ContentBx .FormBx .InputBx p{
+color: #607d8b;
+}
+
+section.Home_Page .ContentBx .FormBx .InputBx p a{
+color: #ff4584;
+text-decoration-line: none;
+}
+
+@media (max-width: 768px)
+{
+  section.Home_Page .imgBx
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+}
+section.Home_Page .ContentBx{
+    display: flex;
+    justify-content: center;
+    align-items: center;      
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 2;
+}
+section.Home_Page .ContentBx .FormBx{
+    background-color: white;
+    padding: 30px 15px;
+    border-radius: 10%;
+}
+}
+
+/* Section Profile Page for admin   */
+section.Sec_Pro{
+  position: relative;
+   background-image: url(/ProjectExamManagement/Image/Profile.jpg);  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+section.Sec_Pro .Sec_Pro_Tab{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+section.Sec_Pro h2{
+  text-align: center;
+  font-size: 40px;
+  background-color: #0082e6;
+  color: white;
+  border: 10px solid  aquamarine;
+}
+section.Sec_Pro .Tab{
+  margin-top: 10px;
+  background-color: #0082e6;
+  border: 10px solid  aquamarine;
+  height: 250px;
+  width: 500px;
+  border-radius: 5px;
+}
+section.Sec_Pro .Profile-tab{
+  width: 100%;
+  height: 100%;
+
+}
+
+section.Sec_Pro .Profile-tab-th{
+  text-align: left;
+  width: 100px;
+  padding-left: 5px;
+}
+section.Sec_Pro .Profile-tab, .Profile-tab-th, .Profile-tab-td{
+  border: 1px solid aquamarine;
+  border-collapse: collapse;
+  color: white;
+}
+section.Sec_Pro .Profile-tab-td{
+  padding-left: 7px;
+}
+
+
+/*Exam List Page   */
+
+#Header_Examlist{
+  text-align: center;
+  padding-bottom: 60px;
+}
+.Exam_List_Ct{
+  max-width: 900px;
+  margin: auto;
+}
+
+
+
+#index_admin{
+  position:static;
+  text-align: center;
+  color: white;
+}
+#centered {
+  background-color: #0082e6;
+  border-radius: 15%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+}
