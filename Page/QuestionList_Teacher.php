@@ -134,7 +134,7 @@ include('header_teacher.php');
 
 	        		<input type="submit" name="question_button_action" id="question_button_action" class="btn btn-success btn-sm" value="Add" />
 
-	          		<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Đóng</button>
+	          		<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
 	        	</div>
         	</div>
     	</form>

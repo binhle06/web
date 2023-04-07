@@ -63,6 +63,49 @@
 				echo json_encode($output);
 			}
 
+
+
+			if($_POST['action'] == 'Register')
+			{
+				$exam->data = array(
+					':username'	=>	$_POST['username'],
+					
+				);
+
+				$exam->query = "
+				select * from User_info where UserId = :username
+				";
+
+				$total_row = $exam->total_row();
+
+				if($total_row < 1)
+				{
+					$exam->data = array(
+						':username'	=>	$_POST['username'],
+						':fullname'	=>	$_POST['fullname'],
+						':password'	=>	$_POST['password'],
+						
+					);
+
+					$exam->query = "
+					insert into User_info (UserId, UserFullname, pass, User_role) 
+					Values (:username,:fullname, :password, 'Student');
+						";
+					$result = $exam->execute_query();
+						$output = array(
+							'success'=>	1
+						);
+					
+				}
+				else
+				{
+					$output = array(
+						'success'=>	0
+					);
+				}
+				echo json_encode($output);
+			}
+
 		}
 
 	if(isset($_POST['admin']))
@@ -126,6 +169,7 @@
 				$sub_array[] = '<button type="button" name="delete" id="'.$row["TestId"].'" class="btn btn-danger btn-sm delete">Delete</button>';
 				$sub_array[] = '<button type="button" name="View" id="'.$row["TestId"].'" class="btn btn-warning btn-sm view">View Question</button>';
 				$sub_array[] = '<button type="button" name="dark" id="'.$row["TestId"].'" class="btn btn-dark btn-sm dark">Change</button>';
+				$sub_array[] = '<button type="button" name="info" id="'.$row["TestId"].'" class="btn btn-info btn-sm info">See Result</button>';
 				$data[] = $sub_array;
 			}
 			$output = array(
@@ -286,11 +330,45 @@
 			echo json_encode($output);
 		}
 
+		if($_POST['admin_action'] == 'To_Result')
+		{
+			$_SESSION['TempId'] = $_POST["TestId"];
+
+			$output = array(
+				'success'	=>	'Go To Exam Qquestion List'
+			);
+			echo json_encode($output);
+		}
+
 		
 	}
 
 
+	if($_POST['admin'] == 'result_list')
+		{
+			
+			 if($_POST['admin_action'] == 'delete')
+				{
+					$exam->data = array(
+						':UserId'	=>	$_POST['UserId'],
+					);
 
+					$exam->query = "
+					DELETE FROM user_exam_question_answer
+					WHERE TestId = '".$_SESSION['TempId']."' and UserId = :UserId;
+				
+					";
+
+					$exam->execute_query();
+
+					$output = array(
+						'success'	=>	'User Score Details has been removed'
+					);
+
+					echo json_encode($output);
+				}
+
+		}
 
 
 
@@ -790,6 +868,7 @@
 				$sub_array[] = '<button type="button" name="delete" id="'.$row["TestId"].'" class="btn btn-danger btn-sm delete">Delete</button>';
 				$sub_array[] = '<button type="button" name="View" id="'.$row["TestId"].'" class="btn btn-warning btn-sm view">View Question</button>';
 				$sub_array[] = '<button type="button" name="dark" id="'.$row["TestId"].'" class="btn btn-dark btn-sm dark">Change</button>';
+				$sub_array[] = '<button type="button" name="info" id="'.$row["TestId"].'" class="btn btn-info btn-sm info">See Result</button>';
 				$data[] = $sub_array;
 			}
 			$output = array(
@@ -953,6 +1032,19 @@
 					echo json_encode($output);
 				}
 
+
+
+				
+		if($_POST['teacher_action'] == 'To_Result')
+		{
+			$_SESSION['TempId'] = $_POST["TestId"];
+
+			$output = array(
+				'success'	=>	'Go To Exam Qquestion List'
+			);
+			echo json_encode($output);
+		}
+
 		}
 
 		if($_POST['teacher'] == 'Profile_list')
@@ -997,8 +1089,37 @@
 		}
 
 
+	
+			
+
+			
 
 
+		if($_POST['teacher'] == 'result_list')
+		{
+			
+			 if($_POST['teacher_action'] == 'delete')
+				{
+					$exam->data = array(
+						':UserId'	=>	$_POST['UserId'],
+					);
+
+					$exam->query = "
+					DELETE FROM user_exam_question_answer
+					WHERE TestId = '".$_SESSION['TempId']."' and UserId = :UserId;
+				
+					";
+
+					$exam->execute_query();
+
+					$output = array(
+						'success'	=>	'User Score Details has been removed'
+					);
+
+					echo json_encode($output);
+				}
+
+		}
 
 		if($_POST['teacher'] == 'Question_list')
 		{
@@ -1278,7 +1399,8 @@
 				$sub_array[] = $row["Question_total"];
 				$sub_array[] = $row["Time_limit_minute"];
 				$sub_array[] = $row["UserFullname"];
-				$sub_array[] = '<button type="button" name="View" id="'.$row["TestId"].'" class="btn btn-warning btn-sm view">View Question</button>';
+				$sub_array[] = '<button type="button" name="View" id="'.$row["TestId"].'" class="btn btn-warning btn-sm view">Take test</button>';
+				$sub_array[] = '<button type="button" name="info" id="'.$row["TestId"].'" class="btn btn-info btn-sm info">See Result</button>';
 				$data[] = $sub_array;
 			}
 			$output = array(
@@ -1289,8 +1411,310 @@
 			);
 			echo json_encode($output);
 		 	}
+
+			 if($_POST['student_action'] == 'To_Test')
+			{
+
+			$_SESSION['ToTestId'] = $_POST["TestId"];
+
+			$exam->query = "
+			Select * from user_exam_question_answer 
+			where TestId = '".$_SESSION['ToTestId']."' 
+			and UserId = '".$_SESSION['UserId']."'
+			";
+			$total_row = $exam->total_row();
+			if($total_row > 0)
+				{
+					$output = array(
+						'success'	=>	'2'
+					);
+				}
+				else{
+					$exam->query = "
+					SELECT question_id FROM Question_List 
+					WHERE TestId = '".$_POST['TestId']."'
+					";
+					$result = $exam->query_result();
+					foreach($result as $row)
+					{
+						$exam->data = array(
+							':UserId'				=>	$_SESSION['UserId'],
+							':TestId'				=>	$_POST['TestId'],
+							':question_id'			=>	$row['question_id'],
+							':user_answer_option'	=>	'0',
+							':marks'				=>	'0'	
+							);
+						$exam->query = "
+						INSERT INTO user_exam_question_answer 
+						(UserId, TestId, question_id, user_answer_option, marks) 
+						VALUES (:UserId, :TestId, :question_id, :user_answer_option, :marks)
+						";
+
+							$exam->execute_query();
+					}	
+
+					$output = array(
+							'success'	=>	'1'
+					);
+				}
+			echo json_encode($output);
+			}
+
+			if($_POST['student_action'] == 'To_Result')
+			{
+			$_SESSION['TempId'] = $_POST["TestId"];
+
+			$output = array(
+				'success'	=>	'Go To Result List'
+			);
+			echo json_encode($output);
+			}
+		}
+
+
+		if($_POST['student'] == 'view_exam')
+	{
+		if($_POST['student_action'] == 'load_question')
+		{
+			if($_POST['question_id'] == '')
+			{
+				$exam->query = "
+				SELECT * FROM Question_List 
+				WHERE TestId = '".$_POST["exam_id"]."' 
+				ORDER BY question_id ASC 
+				LIMIT 1
+				";
+			}
+			else
+			{
+				$exam->query = "
+				SELECT * FROM Question_List 
+				WHERE question_id = '".$_POST["question_id"]."' 
+				";
+			}
+
+			$result = $exam->query_result();
+
+			$output = '';
+
+			foreach($result as $row)
+			{
+				$output .= '
+				<h1>'.$row["question_detail"].'</h1>
+				<hr />
+				<br />
+				<div class="row">
+				';
+
+				$exam->query = "
+				SELECT * FROM option_table 
+				WHERE question_id = '".$row['question_id']."'
+				";
+				$sub_result = $exam->query_result();
+
+				$count = 1;
+
+				foreach($sub_result as $sub_row)
+				{
+					$output .= '
+					<div class="col-md-6" style="margin-bottom:32px;">
+						<div class="radio">
+							<label><h4><input type="radio" name="option_1" class="answer_option" data-question_id="'.$row["question_id"].'"
+							data-id="'.$count.'"/>&nbsp;'.$sub_row["option_detail"].'</h4></label>
+						</div>
+					</div>
+					';
+
+					$count = $count + 1;
+				}
+				$output .= '
+				</div>
+				';
+				$exam->query = "
+				SELECT question_id FROM Question_List 
+				WHERE question_id < '".$row['question_id']."' 
+				AND TestId = '".$_POST["exam_id"]."' 
+				ORDER BY question_id DESC 
+				LIMIT 1";
+
+				$previous_result = $exam->query_result();
+
+				$previous_id = '';
+				$next_id = '';
+
+				foreach($previous_result as $previous_row)
+				{
+					$previous_id = $previous_row['question_id'];
+				}
+
+				$exam->query = "
+				SELECT question_id FROM Question_List 
+				WHERE question_id > '".$row['question_id']."' 
+				AND TestId = '".$_POST["exam_id"]."' 
+				ORDER BY question_id ASC 
+				LIMIT 1";
+  				
+  				$next_result = $exam->query_result();
+
+  				foreach($next_result as $next_row)
+				{
+					$next_id = $next_row['question_id'];
+				}
+
+				$if_previous_disable = '';
+				$if_next_disable = '';
+
+				if($previous_id == "")
+				{
+					$if_previous_disable = 'disabled';
+				}
+				
+				if($next_id == "")
+				{
+					$if_next_disable = 'disabled';
+				}
+
+				$output .= '
+					<br /><br />
+				  	<div align="center">
+				   		<button type="button" name="previous" class="btn btn-info btn-lg previous" id="'.$previous_id.'" '.$if_previous_disable.'>Previous</button>
+				   		<button type="button" name="next" class="btn btn-warning btn-lg next" id="'.$next_id.'" '.$if_next_disable.'>Next</button>
+				  	</div>
+				  	<br /><br />';
+			}
+
+			echo $output;
+		}
+		if($_POST['student_action'] == 'question_navigation')
+		{
+			$exam->query = "
+				SELECT question_id FROM question_List
+				WHERE TestId = '".$_POST["exam_id"]."' 
+				ORDER BY question_id ASC 
+				";
+			$result = $exam->query_result();
+			$output = '
+			<div class="card">
+				<div class="card-header">Question Navigation</div>
+				<div class="card-body">
+					<div class="row">
+			';
+			$count = 1;
+			foreach($result as $row)	
+			{
+				$output .= '
+				<div class="col-md-2" style="margin-bottom:24px;">
+					<button type="button" class="btn btn-primary btn-lg question_navigation" data-question_id="'.$row["question_id"].'">'.$count.'</button>
+				</div>
+				';
+				$count++;
+			}
+			$output .= '
+				</div>
+			</div></div>
+			';
+			echo $output;
+		}
+
+		if($_POST['student_action'] == 'user_detail')
+		{
+			$exam->query = "
+			SELECT * FROM User_info 
+			WHERE UserId = '".$_SESSION["UserId"]."'
+			";
+
+			$result = $exam->query_result();
+
+			$output = '
+			<div class="card">
+				<div class="card-header">User Details</div>
+				<div class="card-body">
+					<div class="row">
+			';
+
+			foreach($result as $row)
+			{
+				$output .= '
+				<div class="col-md-9">
+					<table class="table table-bordered">
+						<tr>
+							<th>Name</th>
+							<td>'.$row["UserId"].'</td>
+						</tr>
+						<tr>
+							<th>Email ID</th>
+							<td>'.$row["UserFullname"].'</td>
+						</tr>
+					</table>
+				</div>
+				';
+			}
+			$output .= '</div></div></div>';
+			echo $output;
+		}
+
+		
+		if($_POST['student_action'] == 'answer')
+		{
+			$orignal_answer = $exam->Get_question_answer_option($_POST['question_id']);
+
+			$marks = 0;
+
+			if($orignal_answer == $_POST['answer_option'])
+			{
+				$marks += 1;
+			}
+			else
+			{
+				$marks += 0;
+			}
+
+			echo $marks;
+			$exam->data = array(
+				':user_answer_option'	=>	$_POST['answer_option'],
+				':marks'				=>	$marks
+			);
+
+			$exam->query = "
+			UPDATE user_exam_question_answer 
+			SET user_answer_option = :user_answer_option, marks = :marks 
+			WHERE UserId = '".$_SESSION["UserId"]."' 
+			AND TestId = '".$_POST['exam_id']."' 
+			AND question_id = '".$_POST["question_id"]."'
+			";
+			$exam->execute_query();
 		}
 	}
+
+
+	if($_POST['student'] == 'result_list')
+		{
+			
+			 if($_POST['teacher_action'] == 'delete')
+				{
+					$exam->data = array(
+						':UserId'	=>	$_POST['UserId'],
+					);
+
+					$exam->query = "
+					DELETE FROM user_exam_question_answer
+					WHERE TestId = '".$_SESSION['TempId']."' and UserId = :UserId;
+				
+					";
+
+					$exam->execute_query();
+
+					$output = array(
+						'success'	=>	'User Score Details has been removed'
+					);
+
+					echo json_encode($output);
+				}
+
+		}
+
+
+}
 
 
 

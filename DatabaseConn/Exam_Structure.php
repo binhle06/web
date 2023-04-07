@@ -17,9 +17,9 @@ class Exam_Struct
 		$this->host = 'localhost';
 		$this->username = 'root';
 		$this->password = '';
-		$this->database = 'nlcn';
+		$this->database = 'betaexam';
 
-		$this->connect = new PDO('mysql:host=localhost;dbname=nlcn;port=3306', "$this->username", "$this->password");
+		$this->connect = new PDO('mysql:host=localhost;dbname=betaexam;port=3306', "$this->username", "$this->password");
 
 		session_start();
 	}
@@ -304,7 +304,7 @@ class Exam_Struct
 	function Get_question_answer_option($question_id)
 	{
 		$this->query = "
-		SELECT answer_option FROM question_table 
+		SELECT answer_option FROM Question_List 
 		WHERE question_id = '".$question_id."' 
 		";
 

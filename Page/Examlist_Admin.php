@@ -13,13 +13,13 @@ include('header_admin.php');
                            <th width="30%">Test Name</th>
                            <th width="5%">Question Total</th>
                            <th width="5%">Time limit</th>
-						   <th width="20%">Arthor</th>
+						   <th width="15%">Arthor</th>
 						   <th width="5%">Status</th>
                            <th scope="col" width="5%">Edit</th>
                            <th scope="col" width="5%">Delete</th>
 						   <th scope="col" width="5%">Question</th>
-						   <th scope="col" width="5%">Change Status</th>
-
+						   <th scope="col" width="10%">Change Status</th>
+						   <th scope="col" width="10%">View Student</th>
                         </tr>
             </thead>
 		</table>
@@ -350,7 +350,24 @@ $(document).ready(function(){
 		
 	});
 	
+	$(document).on('click', '.info', function(){
+		TestId = $(this).attr('id');
+		console.log(TestId);
+
+
+		$.ajax({
+			url:"../DatabaseConn/Ajax_func.php",
+			method:"POST",
+			data:{admin_action:'To_Result', TestId:TestId, admin:'exam_list'},
+			dataType:"json",
+			success:function(data)
+			{
+				location.href = "ResultList_Admin.php";
+			}
+		})
 		
+		
+	});	
 
 
 

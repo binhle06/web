@@ -18,7 +18,7 @@ $exam->Student_session_private();
     <meta charset="utf-8">
     <title>Student Homepage</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
- 
+    
 
     <!-- bootstrap Lib -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -31,6 +31,8 @@ $exam->Student_session_private();
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.1/dist/parsley.js"></script>
+    <link rel="stylesheet" href="../DatabaseConn/TimeCircles.css" />
+    <script src="../DatabaseConn/TimeCircles.js"></script>
 
 
 </head>
@@ -49,8 +51,7 @@ $exam->Student_session_private();
         <ul>
             <li><a class="active" href="index.php">Home</a></li>
             <li><a href="Examlist.php">Exam List</a></li>
-            <li><a href="UserList_Admin.php">Result List</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="logout.php">Log out</a></li>
+            <li><a href="logout.php">Logout</a></li>
         </ul>
         </nav>

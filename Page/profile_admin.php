@@ -41,7 +41,7 @@ $result = $exam->query_result();
             <br>
             <div align="center">
         <button type="button" id="add_button" data-toggle="modal" data-target="#userModal"
-		class="btn btn-success">Change password</button>
+		class="btn btn-success">Change Password</button>
     </div>
             </div>
         <?php
@@ -61,7 +61,7 @@ $result = $exam->query_result();
       		<div class="modal-content">
       			<!-- Modal Header -->
         		<div class="modal-header">
-          			<h4 class="modal-title" id="modal_title">Change password</h4>
+          			<h4 class="modal-title" id="modal_title">Change Password</h4>
           			<button type="button" class="close" data-dismiss="modal">&times;</button>
         		</div>
 

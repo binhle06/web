@@ -38,10 +38,10 @@ $exam = new Exam_Struct;
         </div>
         <div class="ContentBx">
             <div class="FormBx">
-                    <h2>Log in</h2>
+                    <h2>Login</h2>
                 <form method="post" id="LoginForm">
                     <div class="InputBx">
-                        <span>User Name</span>
+                        <span>Username</span>
                         <input type="text" name="username" id="username" required>
                     </div>
                     <div class="InputBx">
@@ -56,7 +56,7 @@ $exam = new Exam_Struct;
                     </div>
                     
                     <div class="InputBx">
-                        <p>Do not have an account ? <a href="Page/signup.php">Log in</a></p>
+                        <p>Don't have an account yet? <a href="register.php">Sign up</a></p>
                     </div>
                 </form>
             </div>

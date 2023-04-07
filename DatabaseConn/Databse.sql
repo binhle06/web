@@ -1,5 +1,5 @@
 Create Table User_info(
-    Id int(6) DEFAULT AUTO_INCREMENT,
+    Id int(6) DEFAULT auto_increment,
     UserId Varchar(10) Unique,
     UserFullname Char(50),
     pass Varchar(20),
@@ -67,3 +67,35 @@ Create Table Result_list(
 )
 
 
+CREATE TABLE `user_exam_question_answer` (
+  `user_exam_question_answer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` Varchar(10) NOT NULL,
+  `TestId` Varchar(10) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `user_answer_option` enum('0','1','2','3','4') NOT NULL,
+  `marks` varchar(20) NOT NULL,
+  `Test_Date` datetime DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY (`user_exam_question_answer_id`)
+);
+ALTER TABLE `user_exam_question_answer`
+  MODIFY `user_exam_question_answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+select sum(marks), TestId, Test_Date from user_exam_question_answer where TestId = 'Ct200HPHP' and UserId = 'B1901951';
+
+select  TestId, UserId, sum(marks) as total_mark, Test_Date
+			from user_exam_question_answer where
+			 TestId in (SELECT TestId FROM test_list WHERE UserId = 'B1910631')
+
+select  TestId, UserId, sum(marks) as total_mark, Test_Date
+			from user_exam_question_answer where
+			 TestId in (SELECT TestId FROM test_list WHERE UserId =  'B1910631' )
+			 And ( TestId LIKE "%Ct%" )
+
+
+SELECT User_info.UserId, User_info.UserFullname, sum(user_exam_question_answer.marks) as total_mark  
+	FROM user_exam_question_answer  
+	INNER JOIN User_info 
+	ON User_info.UserId = user_exam_question_answer.UserId 
+	WHERE user_exam_question_answer.TestId = '$exam_id' 
+	GROUP BY user_exam_question_answer.UserId 
+	ORDER BY total_mark DESC

@@ -54,10 +54,9 @@ $exam->Admin_session_private();
         <label class="logo">Examination: Admin</label>
         <ul>
             <li><a class="active" href="index_admin.php">Home</a></li>
-            <li><a href="">Result List</a></li>
             <li><a href="Examlist_Admin.php">Exam List</a></li>
             <li><a href="UserList_Admin.php">User List</a></li>
             <li><a href="profile_admin.php">Profile</a></li>
-            <li><a href="logout.php">Log out</a></li>
+            <li><a href="logout.php">Logout</a></li>
         </ul>
         </nav>

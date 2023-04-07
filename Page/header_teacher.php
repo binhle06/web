@@ -16,7 +16,7 @@ $exam->Teacher_session_private();
 
 <head>
     <meta charset="utf-8">
-    <title>Teacher Homepage</title>
+    <title>Admin Homepage</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
  
 
@@ -49,8 +49,7 @@ $exam->Teacher_session_private();
         <ul>
             <li><a class="active" href="index_teacher.php">Home</a></li>
             <li><a href="Examlist_Teacher.php">Exam List</a></li>
-            <li><a href="UserList_Admin.php">Result List</a></li>
             <li><a href="profile_teacher.php">Profile</a></li>
-            <li><a href="logout.php">Log out</a></li>
+            <li><a href="logout.php">Logout</a></li>
         </ul>
         </nav>

@@ -26,14 +26,14 @@
         
         <div class="ContentBx">
             <div class="FormBx">
-                    <h2>Đăng kí</h2>
+                    <h2>Sign Up</h2>
                     <form method="post" name="loginform" id="loginform">
                     <div class="InputBx">
-                        <span>User Name</span>
+                        <span>Username</span>
                         <input type="text" name="uid">
                     </div>
                     <div class="InputBx">
-                        <span>Name</span>
+                        <span>Full name</span>
                         <input type="text" name="email">
                     </div>
                     <div class="InputBx">
@@ -41,7 +41,7 @@
                         <input type="password" name="pwd">
                     </div>
                     <div class="InputBx">
-                        <span>Confirm password</span>
+                        <span>Confirm Password</span>
                         <input type="password" name="pwdRepeat">
                     </div>
                     <br>
@@ -51,7 +51,7 @@
                     </div>
                     
                     <div class="InputBx">
-                        <p>Bạn chưa có tài khoản ? <a href="Page/signup.php">Đăng nhập</a></p>
+                        <p>Don't have an account yet? <a href="Page/signup.php">Sign in</a></p>
                     </div>
                 </form>
             </div>
