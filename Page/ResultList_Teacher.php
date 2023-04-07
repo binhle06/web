@@ -9,7 +9,7 @@ user_exam_question_answer.Test_Date
 FROM user_exam_question_answer  
 INNER JOIN User_info 
 ON User_info.UserId = user_exam_question_answer.UserId 
-WHERE user_exam_question_answer.TestId = '".$_SESSION['TempId']."' 
+WHERE user_exam_question_answer.TestId = '".$_SESSION['UserId']."' 
 GROUP BY user_exam_question_answer.UserId 
 ORDER BY total_mark DESC 
 ";

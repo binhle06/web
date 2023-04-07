@@ -51,6 +51,7 @@ $exam->Student_session_private();
         <ul>
             <li><a class="active" href="index.php">Home</a></li>
             <li><a href="Examlist.php">Exam List</a></li>
+            <li><a href="ResultList.php">ResultList</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>

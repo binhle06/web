@@ -49,6 +49,7 @@ $exam->Teacher_session_private();
         <ul>
             <li><a class="active" href="index_teacher.php">Home</a></li>
             <li><a href="Examlist_Teacher.php">Exam List</a></li>
+            <li><a href="ResultList_Teacher.php">ResultList</a></li>
             <li><a href="profile_teacher.php">Profile</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
